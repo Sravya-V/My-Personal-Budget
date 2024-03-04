@@ -2,15 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- This is an SEO Change -->
+    <!-- SEO Change -->
     <meta name="description" content="Manage all your expenses in one place">
-    <!-- This is an SEO Change -->
+    <!-- SEO Change -->
     <meta name="keywords" content="Personal Budget App, Track expenses">
-    <!-- This is an SEO Change -->
+    <!-- SEO Change -->
     <meta property="og:title" content="Personal Budget - Your Budget management App" />
-    <!-- This is an SEO Change -->
+    <!-- SEO Change -->
     <meta property="og:description" content="Manage your Personal expenses" />
-    <!-- This is an SEO Change -->
+    <!-- SEO Change -->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Personal Budget</title>
@@ -18,30 +18,30 @@
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
-    <!-- This is a Semantic HTML change -->
-    <!-- This is an A11y Change -->
+    <!--  Semantic HTML change -->
+    <!--  A11y Change -->
     <nav class="menu" aria-label="Main Menu">
         <ul>
             <li><a href="">Homepage</a></li>
             <li><a href="about.html">About</a></li>
             <li><a href="login.html">Login</a></li>
-            <!-- This is an A11y Change -->
+            <!-- A11y Change -->
             <li><a href="https://google.com" target="_blank">Google</a></li>
         </ul>
     </nav>
 
-    <!-- This is a Semantic HTML change -->
-    <!-- This is an A11y Change -->
+    <!--  Semantic HTML change -->
+    <!--  A11y Change -->
     <header class="hero" role="banner">
         <h1>Personal Budget</h1>
         <h2>A personal-budget management app</h2>
     </header>
 
-    <!-- This is a Semantic HTML change -->
-    <!-- This is an A11y Change -->
+    <!--  Semantic HTML change -->
+    <!--  A11y Change -->
     <section class="container center" role="main" aria-label="Features">
         <div>
-            <!-- This is a Semantic HTML change -->
+            <!--  Semantic HTML change -->
             <article class="text-box">
                 <h1>Stay on track</h1>
                 <p>
@@ -50,14 +50,14 @@
                     app will help you with that!
                 </p>
             </article>
-            <!-- This is a Semantic HTML change -->
+            <!--  Semantic HTML change -->
             <article class="text-box">
                 <h1>Alerts</h1>
                 <p>
                     What if your clothing budget ended? You will get an alert. The goal is to never go over the budget.
                 </p>
             </article>
-            <!-- This is a Semantic HTML change -->
+            <!--  Semantic HTML change -->
             <article class="text-box">
                 <h1>Results</h1>
                 <p>
@@ -66,14 +66,14 @@
                     because they know it is all good and accounted for.
                 </p>
             </article>
-            <!-- This is a Semantic HTML change -->
+            <!--  Semantic HTML change -->
             <article class="text-box">
                 <h1>Free</h1>
                 <p>
                     This app is free!!! And you are the only one holding your data!
                 </p>
             </article>
-            <!-- This is a Semantic HTML change -->
+            <!--  Semantic HTML change -->
             <article class="text-box">
                 <h1>Stay on track</h1>
                 <p>
@@ -82,7 +82,7 @@
                     app will help you with that!
                 </p>
             </article>
-            <!-- This is a Semantic HTML change -->
+            <!--  Semantic HTML change -->
             <article class="text-box">
                 <h1>Alerts</h1>
                 <p>
@@ -90,11 +90,11 @@
                 </p>
             </article>
             <div class="charts">
-                <!-- This is a Semantic HTML change -->
+                <!--  Semantic HTML change -->
                 <article class="text-box d3js" id="d3jsChart">
                     <h1>D3js Chart</h1>
                 </article>
-                <!-- This is a Semantic HTML change -->
+                <!--  Semantic HTML change -->
                 <article class="text-box">
                     <h1>Pie Chart</h1>
                     <p>
@@ -105,8 +105,8 @@
         </div>
     </section>
 
-    <!-- This is a Semantic HTML change -->
-    <!-- This is an A11y Change -->
+    <!--  Semantic HTML change -->
+    <!--  A11y Change -->
     <footer class="footer" role="contentinfo">
         <div class="center">
             All rights reserved &copy; Sravya Vemuri
@@ -123,17 +123,7 @@
             datasets:[
                 {
                     data: [],
-                    backgroundColor: [
-                        '#ffcd56',
-                        '#ff6384',
-                        '#36a2eb',
-                        '#fd6b19',
-                        '#CC0000',
-                        '#45818e',
-                        '#c90076',
-                        '#783f04',
-                        '#f6b26b'
-                    ],
+                    backgroundColor: [],
                 }
             ],
             myBudget: []
@@ -153,7 +143,7 @@
                 height = 450
                 margin = 40
 
-            // The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
+            // The radius of the pie plot is half the width or half the height (smallest one). I subtract a bit of margin.
             var radius = Math.min(width, height) / 2 - margin
 
             // append the svg object to the div called 'my_dataviz'
@@ -169,7 +159,7 @@
 
             // set the color scale
             var color = d3.scaleOrdinal()
-            .range(d3.schemeDark2);
+            .range(dataSource.datasets[0].backgroundColor);
 
             // Compute the position of each group on the pie:
             var pie = d3.pie()
@@ -201,7 +191,7 @@
 
             // Add the polylines between chart and labels:
             svg
-            .selectAll('allPolylines')
+            .selectAll('all Polylines')
             .data(data_ready)
             .enter()
             .append('polyline')
@@ -236,24 +226,22 @@
                 })
         }
 
-        function getBudget(){
-            axios.get('/budget')
-            .then(function (res) {
-                // console.log(res.data);
-                for(var i = 0; i < res.data.myBudget.length; i++){
-                    dataSource.datasets[0].data[i] = res.data.myBudget[i].budget;
-                    dataSource.labels[i] = res.data.myBudget[i].title;
-                    dataSource.myBudget.push({
-                        "title": res.data.myBudget[i].title,
-                        "budget": res.data.myBudget[i].budget
-                    })
+        function getChartValues(){
+            axios.get('http://localhost:3000/budget')
+            .then(function (response) {
+                console.log("budget data: "+ response.data);
+                for(var i = 0; i < response.data.length; i++){
+                    dataSource.datasets[0].data[i] = response.data[i].budget;
+                    dataSource.labels[i] = response.data[i].title;
+                    dataSource.datasets[0].backgroundColor[i] = response.data[i].color;
+                    dataSource.myBudget.push(response.data[i]);
                 }
                 createChart();
                 populateD3jsChart();
             })
         }
 
-        getBudget();
+        getChartValues();
     </script>
 </body>
 </html>
