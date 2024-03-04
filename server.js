@@ -1,17 +1,44 @@
 // Budget API
-
 const express = require("express");
-const app = express();
+const cors = require("cors");
+const mongoose = require("mongoose");
+const bodyParser = require('body-parser');
+const application = express();
 const port = 3000;
+const budgetModel = require('./Models/budgetValues');
 
-const budget = require('./budgetData.json');
+application.use(cors());
+application.use(bodyParser.json());
+application.use('/', express.static("public"));
 
-app.use("/", express.static('public'))
+const MONGODB_URI = "mongodb://localhost:27017/mongo_budget";
 
-app.get("/budget", (req, res) => {
-    res.json(budget);
+mongoose.connect(MONGODB_URI)
+.then(() => {
+    console.log("Connected to MongoDb");
+}).catch((err) => {
+    console.log("Unable to connect to Database.\n", err);
 })
 
-app.listen(port, () => {
-    console.log(`Listening to http://localhost:${port}`)
+application.get("/budget", async (request, response) => {
+    await budgetModel.find().then((data) => {
+        response.json(data);
+    }).catch((connectionError) => {
+        console.error(connectionError);
+        response.status(400).json({error:'Internal Server Error'})
+    });
+})
+
+application.post('/budget', async (request, response) => {
+    const budget = new budgetModel(request.body);
+    await budget.save().then((data) => {
+        response.json(data);
+    }).catch((connectionError) => {
+        console.error(connectionError);
+        response.status(400).json({error: connectionError.message})
+    });
+})
+
+application.listen(port, () => {
+    console.log(`API served at http://localhost:${port}`)
 })
